@@ -24,29 +24,30 @@ const columnArray = [
     {
         id: 2,
         name: "Hai Cột",
-        class: "col-12 col-md-6 col-lg-6"
+        class: "col-6 col-md-6 col-lg-6"
     },
     {
         id: 3,
         name: "Ba Cột",
-        class: "col-12 col-md-4 col-lg-4"
+        class: "col-4 col-md-4 col-lg-4"
     },
     {
         id: 4,
         name: "Bốn Cột",
-        class: "col-12 col-md-3 col-lg-3"
+        class: "col-4 col-md-3 col-lg-3"
     },
     {
         id: 5,
         name: "Sáu Cột",
-        class: "col-12 col-md-2 col-lg-2"
+        class: "col-4 col-md-2 col-lg-2"
     }
 ]
 
 const ChangeColumn = ({columnData, onClick}) => (
-    <div>
+    <div className="d-grid gap-2 d-md-block m-1 mx-auto col-12 col-md-2 col-lg-2">
         <button
             onClick={() => onClick(columnData.class)}
+            className="btn btn-warning"
         >{columnData.name}</button>
     </div>
 )
