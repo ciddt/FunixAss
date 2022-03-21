@@ -23,6 +23,7 @@ class App extends Component {
     return (
       <div className="wrapper">
         <Navbar/>
+        <StaffList staffs={this.state.staffs}/>
       </div>
     )
   }
