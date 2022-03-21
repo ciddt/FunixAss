@@ -12,7 +12,42 @@ const StaffListCard = ({staffData, column, onClick}) => (
                 {staffData.name}
             </div>
         </div>
+    </div>
+)
 
+const columnArray = [
+    {
+        id: 1,
+        name: "Một Cột",
+        class: "col-12"
+    },
+    {
+        id: 2,
+        name: "Hai Cột",
+        class: "col-12 col-md-6 col-lg-6"
+    },
+    {
+        id: 3,
+        name: "Ba Cột",
+        class: "col-12 col-md-4 col-lg-4"
+    },
+    {
+        id: 4,
+        name: "Bốn Cột",
+        class: "col-12 col-md-3 col-lg-3"
+    },
+    {
+        id: 5,
+        name: "Sáu Cột",
+        class: "col-12 col-md-2 col-lg-2"
+    }
+]
+
+const ChangeColumn = ({columnData, onClick}) => (
+    <div>
+        <button
+            onClick={() => onClick(columnData.class)}
+        >{columnData.name}</button>
     </div>
 )
 class StaffList extends Component {
@@ -20,7 +55,7 @@ class StaffList extends Component {
         super(props)
         this.state = {
             columnSelected: "col-12 col-md-6 col-lg-4",
-            staffDetail: null
+            staffDetail: null,
         }
     }
 
@@ -79,10 +114,26 @@ class StaffList extends Component {
         }
     }
 
+
     render() {
-        
+        const changeColumnHandler = (col) => (
+            this.setState({
+                columnSelected: col
+            })
+        )
         return (
             <div className="container">
+                <div className="row">
+                    {
+                        columnArray.map(column => (
+                            <ChangeColumn
+                                key={column.id}
+                                columnData={column}
+                                onClick={changeColumnHandler}
+                            />
+                        ))
+                    }
+                </div>
                 <div className="row">
                     {
                         this.props.staffs.map(staff => (
