@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import {} from "bootstrap/dist/css/bootstrap.min.css";
 import dateFormat from "dateformat";
 
+// component StaffListCard nhận props là staffData, column và onClick
+// Nó trả lại khối card hiển thị tên của nhân viên
 const StaffListCard = ({staffData, column, onClick}) => (
     <div className={column}>
         <div className="card mt-3 border-warning">
@@ -15,6 +17,7 @@ const StaffListCard = ({staffData, column, onClick}) => (
     </div>
 )
 
+// Khởi tạo biến columnArray để lưu giá trị column sẽ được thay đổi
 const columnArray = [
     {
         id: 1,
@@ -43,6 +46,9 @@ const columnArray = [
     }
 ]
 
+// Tạo ChangeColumn component nhận 2 props là columnData và onClick
+// Thay vì đặt function trong render của StaffList component như với StaffListCard Component
+// thì đặt theo cách này sẽ improve performance tốt hơn
 const ChangeColumn = ({columnData, onClick}) => (
     <div className="d-grid gap-2 d-md-block m-1 mx-auto col-12 col-md-2 col-lg-2">
         <button
@@ -52,6 +58,8 @@ const ChangeColumn = ({columnData, onClick}) => (
     </div>
 )
 class StaffList extends Component {
+    // Đặt state columnSelected staffDetail và có giá trị mặc định
+    // Chúng sẽ được thay đổi với phương thức setState()
     constructor(props) {
         super(props)
         this.state = {
@@ -60,12 +68,17 @@ class StaffList extends Component {
         }
     }
 
+    // Khi click vào card tên nhân viên sẽ gọi đến hàm staffDetailHandler
+    // để thiết lập lại state từ null thành dữ liệu thông tin tương ứng
     staffDetailHandler(staff) {
         this.setState({
             staffDetail: staff
         })
     }
 
+    // Sau khi hàm staffDetailHandler thì staffDetailRender sẽ được gọi
+    // để thực thi render ra thông tin chi tiết của nhân viên
+    // Nếu props truyền về là null thì sẽ trả lại thẻ div rỗng
     staffDetailRender(staff) {
         if (staff != null) {
             return (
@@ -117,6 +130,8 @@ class StaffList extends Component {
 
 
     render() {
+        // Hàm changeColumnHandler nhận props là col và thực hiện set lại 
+        // state columnSelected sang props col tương ứng
         const changeColumnHandler = (col) => (
             this.setState({
                 columnSelected: col
@@ -135,6 +150,7 @@ class StaffList extends Component {
                         ))
                     }
                 </div>
+                {/**Sử dụng this.props.staffs vì props được nhận từ App component */}
                 <div className="row">
                     {
                         this.props.staffs.map(staff => (
@@ -147,6 +163,7 @@ class StaffList extends Component {
                         ))
                     }
                 </div>
+                {/**Sử dụng this.state.staffDetail vì đây là state của chính nó */}
                 <div className="row p-2">
                     {this.staffDetailRender(this.state.staffDetail)}
                 </div>
