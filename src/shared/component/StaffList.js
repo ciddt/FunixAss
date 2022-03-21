@@ -4,9 +4,9 @@ import dateFormat from "dateformat";
 
 const StaffListCard = ({staffData, column, onClick}) => (
     <div className={column}>
-        <div className="card mt-1 border-warning">
+        <div className="card mt-3 border-warning">
             <div 
-                className="card-body"
+                className="card-body staff-list"
                 onClick={onClick}
             >
                 {staffData.name}
@@ -147,7 +147,7 @@ class StaffList extends Component {
                         ))
                     }
                 </div>
-                <div className="row">
+                <div className="row p-2">
                     {this.staffDetailRender(this.state.staffDetail)}
                 </div>
                 <p className="text-danger fw-bold text-center mt-3">
