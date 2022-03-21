@@ -1,7 +1,17 @@
 import React, { Component } from "react";
+import {} from "bootstrap/dist/css/bootstrap.min.css";
 import StaffList from "./shared/component/StaffList";
 import { STAFFS } from "./shared/staffs";
 
+const Navbar = () => (
+  <nav className="navbar navbar-dark bg-primary">
+    <div className="container">
+      <span className="navbar-brand text-white">
+        ỨNG DỤNG QUẢN LÝ NHÂN VIÊN v1.0
+      </span>
+    </div>
+  </nav>
+)
 class App extends Component {
   constructor (props) {
     super(props)
@@ -12,7 +22,7 @@ class App extends Component {
   render() {
     return (
       <div className="wrapper">
-        <StaffList/>
+        <Navbar/>
       </div>
     )
   }
