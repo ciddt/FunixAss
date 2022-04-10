@@ -73,7 +73,7 @@ const StaffList = (props) => {
             <div className="btn-group col-12">
                 {/**Lựa chọn sắp xếp số cột */}
                     <select
-                        className="custom-select btn btn-warning border"
+                        className="custom-select btn btn-warning border text-black"
                         onChange={e => setColumn(e.target.value)}
                     >
                         <option>Chọn số cột trình bày</option>
@@ -82,7 +82,7 @@ const StaffList = (props) => {
                                 key={col.classColumn}
                                 value={col.classColumn}
                             >
-                                {cols.name}
+                                {col.name}
                             </option>
                         ))}
                     </select>

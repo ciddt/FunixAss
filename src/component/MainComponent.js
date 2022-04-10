@@ -3,7 +3,7 @@ import Header from "./HeaderComponent";
 import StaffList from "./StaffListComponent";
 import StaffDetail from "./StaffDetailComponent";
 import Department from "./DepartmentComponent";
-import Salary from "./SarlaryComponent";
+import Salary from "./SalaryComponent";
 import Footer from "./FooterComponent";
 import { STAFFS, DEPARTMENTS } from "../shared/staffs";
 import { Navigate, Route, Routes, useParams } from "react-router-dom";
