@@ -19,6 +19,7 @@ const RenderStaffList = ({staff}) => (
     </Link>
 )
 
+// Lưu số cột vào biến cols
 const cols = [
     {
         name: "Một Cột",
@@ -42,11 +43,13 @@ const cols = [
     }
 ]
 
+// Sử dụng phương thức useState để thay đổi giao diện (trạng thái của state)
 const StaffList = (props) => {
     const [name, setName] = useState("");
     const [column, setColumn] = useState("col-6 col-md-4 col-lg-2 mt-3 mb-3")
     const [sortId, setSortId] = useState()
 
+    // Sử dụng sort() và filter để thực hiện chức năng sắp xếp và tìm kiếm
     const staffList = props.staffs
     .sort((a,b) => sortId ? a.id - b.id : b.id - a.id)
     .filter((staff) => {

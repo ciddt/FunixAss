@@ -9,6 +9,8 @@ import { STAFFS, DEPARTMENTS } from "../shared/staffs";
 import { Navigate, Route, Routes, useParams } from "react-router-dom";
 
 function StaffWithId({staffs}) {
+    // Trong phiên bản react 17 không support phương thức match nên phải sử dụng sang phương thức userParams
+    // Lúc này sử dụng phương thức Number thay vì paresint()
     const {staffId} = useParams();
     return (
         <StaffDetail
@@ -25,6 +27,7 @@ class Main extends Component {
             department: DEPARTMENTS,
         }
     }
+    // React 17 không support Switch và Redirect nên chuyển qua Routes và Navigate, route cũng sử dụng element thay vì component
     render() {
         return (
             <>
