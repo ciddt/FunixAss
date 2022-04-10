@@ -1,36 +1,20 @@
-import React, { Component } from "react";
-import {} from "bootstrap/dist/css/bootstrap.min.css";
-import StaffList from "./shared/component/StaffList";
-import { STAFFS } from "./shared/staffs";
+import React from "react";
+import Main from "./component/MainComponent";
+import './App.css';
+import { BrowserRouter } from "react-router-dom";
 
-// Tạo riêng Navbar component và sử dung nó trong App Component 
-// để improve performance thay vì viết thẳng render trong App Component
-const Navbar = () => (
-  <nav className="navbar navbar-dark bg-primary">
-    <div className="container">
-      <span className="navbar-brand text-white">
-        ỨNG DỤNG QUẢN LÝ NHÂN VIÊN v1.0
-      </span>
-    </div>
-  </nav>
-)
-class App extends Component {
-  // khởi tạo state staffs và truyền nó cho children là StaffList component
-  constructor (props) {
-    super(props)
-    this.state = {
-      staffs: STAFFS 
-    }
-  }
-  // component children StaffList sẽ nhận props là state của App component
-  render() {
-    return (
+// Su dung BrowserRouter su dung bo dinh tuyen History API cua HTML5 de giu giao dien nguoi dung dong bo voi URL
+// BrowserRouter la thanh phan me luu tru bao tat ca cac thanh phan khac
+// No duoc dung voi cac web dong
+// Nếu dùng NavLink mà không có BrowserRouter sẽ báo lỗi useLocation() do không
+// Có bộ định tuyến mẹ
+function App() {
+  return (
+    <BrowserRouter>
       <div className="wrapper">
-        <Navbar/>
-        <StaffList staffs={this.state.staffs}/>
+        <Main/>
       </div>
-    )
-  }
+    </BrowserRouter>
+  )
 }
-
 export default App;
