@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Header from "./HeaderComponent";
 import { STAFFS, DEPARTMENTS } from "../shared/staffs";
 
 class Main extends Component {
@@ -13,7 +14,7 @@ class Main extends Component {
     render () {
         return (
             <div>
-                
+                <Header/>
             </div>
         )
     }
