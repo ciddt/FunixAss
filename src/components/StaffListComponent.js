@@ -26,7 +26,7 @@ const isNumber = (val) => !isNaN(Number(val));
 const RenderStaffItem = ({ staff }) => {
   return (
     <Link to={`/staff/${staff.id}`}>
-      <Card>
+      <Card className="border-warning shadow">
         <CardImg width="100%" src={staff.image} alt={staff.name} />
         <CardBody>
           <CardSubtitle>{staff.name}</CardSubtitle>
