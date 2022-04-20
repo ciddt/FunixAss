@@ -15,7 +15,17 @@ class Main extends Component {
     }
 
     render () {
-        
+        const addStaff = (staff) => {
+            // Tạo id random để không bị trùng nhau
+            const id = Math.floor(Math.random() * 1000 + 1)
+            // Khi nhập thêm một danh sách các staff, dữ liệu sẽ được thêm lưu mới vào biến newStaff trong đó
+            // state được set lại gồm dữ liệu cũ (sử dụng toán tử  spread và thêm newStaff)
+            const newStaff = {id, ...staff};
+            this.setState({
+                staff: [...this.state.staffs, newStaff],
+            })
+        }
+
         return (
             <div>
                 <Header/>
@@ -23,7 +33,10 @@ class Main extends Component {
                 <Route
                         path="/staff"
                         component={() => (
-                        <StaffList staffs={this.state.staffs} />
+                            <StaffList 
+                                onAddStaff={addStaff}
+                                staffs={this.state.staffs} 
+                            />
                         )}
                     />
                 </Switch>
