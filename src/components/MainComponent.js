@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Header from "./HeaderComponent";
 import StaffList from "./StaffListComponent";
+import StaffDetail from "./StaffdetailComponent";
 import Department from "./DepartmentComponent";
+import Salary from "./SalaryComponent";
 import Footer from "./FooterComponent";
 import { STAFFS, DEPARTMENTS } from "../shared/staffs";
 import { Switch, Route, Redirect } from "react-router-dom";
@@ -16,33 +18,51 @@ class Main extends Component {
   }
 
   render() {
+    const StaffWithId = ({ match }) => {
+      return (
+        <StaffDetail
+          staff={
+            this.state.staffs.filter(
+              (staff) => staff.id === parseInt(match.params.staffId, 10)
+            )[0]
+          }
+        />
+      );
+    };
+
     const addStaff = (staff) => {
-      // Tạo id random để không bị trùng nhau
-      const id = Math.floor(Math.random() * 1000 + 1);
-      // Khi nhập thêm một danh sách các staff, dữ liệu sẽ được thêm lưu mới vào biến newStaff trong đó
-      // state được set lại gồm dữ liệu cũ (sử dụng toán tử  spread và thêm newStaff)
+      const id = Math.floor(Math.random() * 10000 + 1);
       const newStaff = { id, ...staff };
       this.setState({
-        staff: [...this.state.staffs, newStaff],
+        staffs: [...this.state.staffs, newStaff],
       });
+      console.log(newStaff);
+      console.log(this.state.staffs);
     };
 
     return (
       <div>
         <Header />
         <Switch>
+          <Route path="/staff/:staffId" component={StaffWithId} />
           <Route
             path="/staff"
             component={() => (
-              <StaffList onAddStaff={addStaff} staffs={this.state.staffs} />
+              <StaffList 
+                onAdd={addStaff} staffs={this.state.staffs} departments={this.state.departments}/>
             )}
+          />
+          <Route
+            path="/salary"
+            component={() => <Salary staffs={this.state.staffs} />}
           />
           <Route
             path="/department"
             component={() => (
-              <Department departments = {this.state.departments} />
+              <Department departments={this.state.departments} />
             )}
           />
+          <Redirect to="/staff" />
         </Switch>
         <Footer />
       </div>

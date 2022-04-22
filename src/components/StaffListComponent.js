@@ -22,11 +22,11 @@ const maxLength = (len) => (val) => !val || val.length <= len;
 const minLength = (len) => (val) => val && val.length >= len;
 const isNumber = (val) => !isNaN(Number(val));
 
-// Presentational component (const) dùng để Render danh sách từng nhân viên
+// Presentational component render danh sách từng nhân viên
 const RenderStaffItem = ({ staff }) => {
   return (
     <Link to={`/staff/${staff.id}`}>
-      <Card className="border-warning shadow">
+      <Card className="shadow border-warning">
         <CardImg width="100%" src={staff.image} alt={staff.name} />
         <CardBody>
           <CardSubtitle>{staff.name}</CardSubtitle>
@@ -50,7 +50,7 @@ class StaffList extends Component {
         startDate: false,
       },
     };
-    //Ràng buộc 2 chiều với các hàm khai báo
+    //Ràng buộc hai chiều
     this.toggleModal = this.toggleModal.bind(this);
     this.searchStaff = this.searchStaff.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -58,14 +58,28 @@ class StaffList extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  // Hàm xử lý trả touched về true sau khi người dùng không nhập mà thoát khỏi form nhập liêu
+  //Bật tắt modal
+  toggleModal() {
+    this.setState({
+      openModal: !this.state.openModal,
+    });
+  }
+
+  //Xử lý tìm kiếm nhân viên theo từ khóa
+  searchStaff(event) {
+    const searchName = event.target.searchName.value;
+    event.preventDefault();
+    this.setState({ nameFound: searchName });
+  }
+
+  //Xử lý touched trả về true khi dữ liệu được nhập
   handleBlur = (field) => (evt) => {
     this.setState({
       touched: { ...this.state.touched, [field]: true },
     });
   };
 
-  // Hàm xử lý nhập liệu vào input
+  //Set thay đổi state khi dữ liệu được nhập
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
@@ -76,7 +90,7 @@ class StaffList extends Component {
     });
   }
 
-  // Hàm xử lý submit dữ liệu vào biểu mẫu
+  //Xử lý dữ liệu được submit
   handleSubmit = (value) => {
     const newStaff = {
       name: value.name,
@@ -86,17 +100,17 @@ class StaffList extends Component {
       salaryScale: value.salaryScale,
       annualLeave: value.annualLeave,
       overTime: value.overTime,
-      image: "assets/image/staffadded.png",
+      image: "/assets/image/staffadded.png",
     };
-
+    console.log("Current State is: " + newStaff);
     if (!this.state.doB || !this.state.startDate)
       this.setState({
         touched: { doB: true, startDate: true },
       });
-    else this.props.onAddStaff(newStaff);
+    else this.props.onAdd(newStaff);
   };
 
-  // Hàm kiểm tra ngày tháng có nhập đúng định dạng hay không
+  //Check ngày tháng có bỏ trống không
   validate(doB, startDate) {
     const errors = {
       doB: "",
@@ -104,25 +118,11 @@ class StaffList extends Component {
     };
 
     if (this.state.touched.doB && doB.length < 1)
-      errors.doB = "Không được bỏ trống";
+      errors.doB = "Không được bỏ trống.";
     if (this.state.touched.startDate && startDate.length < 1)
-      errors.startDate = "Không được bỏ trống";
+      errors.startDate = "Không được bỏ trống.";
 
     return errors;
-  }
-
-  // Hàm Bật tắt Modal
-  toggleModal() {
-    this.setState({
-      openModal: !this.state.openModal,
-    });
-  }
-
-  // Hàm tìm kiếm nhân viên theo từ khóa
-  searchStaff(event) {
-    const searchName = event.target.searchName.value;
-    event.preventDefault();
-    this.setState({ nameFound: searchName });
   }
 
   render() {
@@ -145,7 +145,6 @@ class StaffList extends Component {
         );
       });
 
-    //Render giao diện Staff list
     return (
       <div className="container">
         <div className="row">
@@ -182,7 +181,11 @@ class StaffList extends Component {
         <div className="col-12">
           <hr />
         </div>
-        <Modal isOpen={this.state.openModal} toggle={this.toggleModal}>
+        <Modal
+          isOpen={this.state.openModal}
+          toggle={this.toggleModal}
+          className="shadow"
+        >
           <ModalHeader
             toggle={this.toggleModal}
             className="bg-success text-white"
@@ -192,14 +195,14 @@ class StaffList extends Component {
           <ModalBody>
             <LocalForm onSubmit={(value) => this.handleSubmit(value)}>
               <Row className="control-group mb-1">
-                <Label htmlFor="name" md={4}>
+                <Label htmlFor=".name" md={4}>
                   Tên
                 </Label>
                 <Col md={8}>
                   <Control.text
                     model=".name"
                     className="form-control"
-                    id="name"
+                    id=".name"
                     name="name"
                     validators={{
                       required,
@@ -212,19 +215,19 @@ class StaffList extends Component {
                     className="text-danger"
                     show="touched"
                     messages={{
-                      required: "Không được bỏ trống",
+                      required: "Không được bỏ trống. ",
                       minLength: "Hãy nhập nhiều hơn 3 ký tự",
                       maxLength: "Hãy nhập ít hơn 30 ký tự",
                     }}
                   />
                 </Col>
               </Row>
+              {/* Không có Control.date nên phải dùng input và FormFreedback */}
               <Row className="control-group mb-1">
                 <Label htmlFor="doB" md={4}>
                   Ngày sinh
                 </Label>
                 <Col md={8}>
-                  {/* Không có control.date nên dùng Input */}
                   <Input
                     type="date"
                     name="doB"
@@ -263,14 +266,14 @@ class StaffList extends Component {
                     model=".department"
                     name="department"
                     id="department"
-                    defaultValue="Sale"
                     className="form-control"
+                    defaultValue="Sale"
                   >
-                    <option>Sale</option>
-                    <option>HR</option>
-                    <option>Marketing</option>
-                    <option>IT</option>
-                    <option>Finance</option>
+                    <option value="Sale">Sale</option>
+                    <option value="HR">HR</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="IT">IT</option>
+                    <option value="Finance">Finance</option>
                   </Control.select>
                 </Col>
               </Row>
@@ -296,8 +299,8 @@ class StaffList extends Component {
                     className="text-danger"
                     show="touched"
                     messages={{
-                      required: "Không được bỏ trống",
-                      isNumber: "Yêu cầu nhập số",
+                      required: "Không được bỏ trống.",
+                      isNumber: "Yêu cầu phải là số.",
                     }}
                   />
                 </Col>
@@ -323,8 +326,8 @@ class StaffList extends Component {
                     className="text-danger"
                     show="touched"
                     messages={{
-                      required: "Không được bỏ trống",
-                      isNumber: "Yêu cầu nhập số",
+                      required: "Không được bỏ trống.",
+                      isNumber: "Yêu cầu phải là số.",
                     }}
                   />
                 </Col>
@@ -350,15 +353,15 @@ class StaffList extends Component {
                     className="text-danger"
                     show="touched"
                     messages={{
-                      required: "Không được bỏ trống",
-                      isNumber: "Yêu cầu nhập số",
+                      required: "Không được bỏ trống.",
+                      isNumber: "Yêu cầu phải là số.",
                     }}
                   />
                 </Col>
               </Row>
-              <Row className="control-group mt-1 mb-1 text-center">
-                <Col className="col-12">
-                  <Button type="submit" color="success">
+              <Row className="control-group mb-1">
+                <Col>
+                  <Button type="submit" color="success" className="col-12">
                     Thêm
                   </Button>
                 </Col>

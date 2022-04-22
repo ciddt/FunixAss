@@ -1,37 +1,44 @@
-import React from "react";
+import React, { Component } from "react";
+import { Card, CardTitle, CardBody, CardText } from "reactstrap";
 
-const RenderDepartment = ({department}) => (
-    <div className="col-12 col-md-4 col-lg-2">
-        <div className="card border-warning mt-3 mb-3 shadow">
-            <div className="card-body">
-                <h5 className="card-title">{department.name}</h5>
-                <p className="card-text">
-                    {`Số lượng nhân viên: ${department.numberOfStaff}` }
-                </p>
-            </div>
-        </div>
-    </div>
-)
-
-const Department = (props) => {
+// Presentational Component
+class RenderDept extends Component {
+  render() {
     return (
-        <div className="container">
-            <h4 className="mt-2">Phòng Ban</h4>
-            <div className="col-12">
-                <hr/>
-            </div>
-            <div className="row shadow mt-5 mb-5">
-                {
-                    props.departments.map((department) => (
-                        <RenderDepartment
-                            key={department.id}
-                            department={department}
-                        />
-                    ))
-                }
-            </div>
+      <Card className="border-warning shadow">
+        <CardTitle className="m-2">{this.props.dept.name}</CardTitle>
+        <CardBody>
+          <CardText>
+            Số lượng nhân viên: {this.props.dept.numberOfStaff}
+          </CardText>
+        </CardBody>
+      </Card>
+    );
+  }
+}
+
+//Container components
+class Department extends Component {
+  render() {
+    const departments = this.props.departments.map((department) => {
+      return (
+        <div className="col-12 col-md-6 col-lg-4 mt-2 mb-2" key={department.id}>
+          <RenderDept dept={department} />
         </div>
-    )
+      );
+    });
+    return (
+      <div className="container">
+        <div className="col-10 col-md-10">
+          <h3>Phòng Ban</h3>
+        </div>
+        <div className="col-12">
+          <hr />
+        </div>
+        <div className="row shadow m-3">{departments}</div>
+      </div>
+    );
+  }
 }
 
 export default Department;
