@@ -27,7 +27,8 @@ function RenderStaff({ staff }) {
               <p className="card-text">
                 Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}
               </p>
-              <p className="card-text">Phòng ban: {staff.department.name}</p>
+              {/* Nếu Department là undefine thì lấy dữ liệu là staff.department */}
+              <p className="card-text">Phòng ban: {staff.department.name || staff.department}</p>
               <p className="card-text">
                 Số ngày nghỉ còn lại: {staff.annualLeave}
               </p>
