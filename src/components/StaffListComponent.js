@@ -94,20 +94,15 @@ class StaffList extends Component {
   handleSubmit = (value) => {
     const newStaff = {
       name: value.name,
-      doB: this.state.doB,
-      startDate: this.state.startDate,
+      doB: value.doB,
+      startDate: value.startDate,
       department: value.department,
       salaryScale: value.salaryScale,
       annualLeave: value.annualLeave,
       overTime: value.overTime,
       image: "/assets/image/staffadded.png",
     };
-    console.log("Current State is: " + newStaff);
-    if (!this.state.doB || !this.state.startDate)
-      this.setState({
-        touched: { doB: true, startDate: true },
-      });
-    else this.props.onAdd(newStaff);
+    this.props.onAdd(newStaff);
   };
 
   //Check ngày tháng có bỏ trống không
@@ -195,14 +190,14 @@ class StaffList extends Component {
           <ModalBody>
             <LocalForm onSubmit={(value) => this.handleSubmit(value)}>
               <Row className="control-group mb-1">
-                <Label htmlFor=".name" md={4}>
+                <Label htmlFor="name" md={4}>
                   Tên
                 </Label>
                 <Col md={8}>
                   <Control.text
                     model=".name"
                     className="form-control"
-                    id=".name"
+                    id="name"
                     name="name"
                     validators={{
                       required,
@@ -222,22 +217,29 @@ class StaffList extends Component {
                   />
                 </Col>
               </Row>
-              {/* Không có Control.date nên phải dùng input và FormFreedback */}
               <Row className="control-group mb-1">
                 <Label htmlFor="doB" md={4}>
                   Ngày sinh
                 </Label>
                 <Col md={8}>
-                  <Input
-                    type="date"
-                    name="doB"
-                    id="doB"
-                    valid={errors.doB === ""}
-                    invalid={errors.doB !== ""}
-                    onBlur={this.handleBlur("doB")}
-                    onChange={this.handleInputChange}
-                  />
-                  <FormFeedback>{errors.doB}</FormFeedback>
+                  <Control.text
+                      type="date"
+                      model=".doB"
+                      className="form-control"
+                      id="doB"
+                      name="doB"
+                      validators={{
+                        required
+                      }}
+                    />
+                    <Errors
+                      model=".doB"
+                      className="text-danger"
+                      show="touched"
+                      messages={{
+                        required: "Không được bỏ trống."
+                      }}
+                    />
                 </Col>
               </Row>
               <Row className="control-group mb-1">
@@ -245,16 +247,24 @@ class StaffList extends Component {
                   Ngày vào công ty
                 </Label>
                 <Col md={8}>
-                  <Input
-                    type="date"
-                    name="startDate"
-                    id="startDate"
-                    valid={errors.startDate === ""}
-                    invalid={errors.startDate !== ""}
-                    onBlur={this.handleBlur("startDate")}
-                    onChange={this.handleInputChange}
-                  />
-                  <FormFeedback>{errors.startDate}</FormFeedback>
+                    <Control.text
+                      type="date"
+                      model=".startDate"
+                      className="form-control"
+                      id="startDate"
+                      name="startDate"
+                      validators={{
+                        required
+                      }}
+                    />
+                    <Errors
+                      model=".startDate"
+                      className="text-danger"
+                      show="touched"
+                      messages={{
+                        required: "Không được bỏ trống."
+                      }}
+                    />
                 </Col>
               </Row>
               <Row className="control-group mb-1">
