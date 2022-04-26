@@ -91,7 +91,6 @@ class StaffList extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-
     this.setState({
       [name]: value,
     });
@@ -237,6 +236,7 @@ class StaffList extends Component {
                     className="form-control"
                     id="name"
                     name="name"
+                    placeholder="Nhập Họ Tên Nhân Viên"
                     value={this.state.name}
                     valid={errors.name === ""}
                     invalid={errors.name !== ""}
@@ -310,10 +310,11 @@ class StaffList extends Component {
                 </Label>
                 <Col md={8}>
                   <Input
-                    type="number"
+                    type="text"
                     className="form-control"
                     id="salaryScale"
                     name="salaryScale"
+                    placeholder="Nhập hệ số lương nhân viên"
                     value={this.state.salaryScale}
                     valid={errors.salaryScale === ""}
                     invalid={errors.salaryScale !== ""}
@@ -329,10 +330,11 @@ class StaffList extends Component {
                 </Label>
                 <Col md={8}>
                   <Input
-                    type="number"
+                    type="text"
                     className="form-control"
                     id="annualLeave"
                     name="annualLeave"
+                    placeholder="Nhập số ngày nghỉ còn lại"
                     value={this.state.annualLeave}
                     valid={errors.annualLeave === ""}
                     invalid={errors.annualLeave !== ""}
@@ -348,10 +350,11 @@ class StaffList extends Component {
                 </Label>
                 <Col md={8}>
                   <Input
-                    type="number"
+                    type="text"
                     className="form-control"
                     id="overTime"
                     name="overTime"
+                    placeholder="Nhập số ngày làm việc thêm giờ"
                     value={this.state.overTime}
                     valid={errors.overTime === ""}
                     invalid={errors.overTime !== ""}
