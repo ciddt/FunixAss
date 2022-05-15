@@ -25,7 +25,7 @@ exports.STAFFS =
         },
         {
           id: 2,
-          name: "Trần Anh Dũng",
+          name: "Trần Thị Cúc",
           doB: "2001-01-01T08:59:00.000Z",
           salaryScale: 1,
           startDate: "2019-04-30T08:59:00.000Z",

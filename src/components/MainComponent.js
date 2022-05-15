@@ -40,22 +40,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   fetchDeptStaffs: (deptId) => {
     dispatch(fetchDeptStaffs(deptId));
-  },
-  resetAddStaffForm: () => {
-    dispatch(actions.reset("newStaff"));
-  },
-  fillSelectedStaff: (actionsChange) => {
-    dispatch(actionsChange);
-  },
-  patchUpdateStaff: (updatedStaff) => {
-    dispatch(patchUpdateStaff(updatedStaff));
-  },
-  deleteStaff: (staffId) => {
-    dispatch(deleteStaff(staffId));
-  },
-  postNewStaff: (newStaff) => {
-    dispatch(postNewStaff(newStaff));
-  },
+  }
 });
 
 class Main extends Component {
@@ -121,8 +106,6 @@ class Main extends Component {
                 staffsLoading={this.props.staffs.isLoading}
                 staffsErrMess={this.props.staffs.errMess}
                 departments={this.props.departments.departments}
-                resetAddStaffForm={this.props.resetAddStaffForm}
-                postNewStaff={this.props.postNewStaff}
               />
             )}
           />
@@ -137,8 +120,6 @@ class Main extends Component {
                     )[0]
                   }
                   departments={this.props.departments.departments}
-                  patchUpdateStaff={this.props.patchUpdateStaff}
-                  deleteStaff={this.props.deleteStaff}
                 />
               );
             }}
@@ -166,8 +147,6 @@ class Main extends Component {
                 staffsLoading={this.props.deptStaffs.isLoading}
                 staffsErrMess={this.props.deptStaffs.errMess}
                 departments={this.props.departments.departments}
-                postNewStaff={this.props.postNewStaff}
-                resetAddStaffForm={this.props.resetAddStaffForm}
               />
             )}
           />

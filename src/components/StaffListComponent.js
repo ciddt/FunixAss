@@ -17,7 +17,6 @@ import {
 import { Link } from "react-router-dom";
 import { FadeTransform } from "react-animation-components";
 import { Loading } from "./LoadingComponent";
-import AddStaffForm from "./AddStaffFormComponent";
 
 export const RenderStaffItem = ({ staff }) => {
   return (
@@ -47,19 +46,11 @@ class StaffList extends Component {
 
     this.state = {
       sortBy: "StaffId",
-      isOpenModal: false,
     };
     this.staffs = JSON.parse(JSON.stringify(this.props.staffs));
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
   }
 
-  //Open - Close Modal
-  toggleModal() {
-    this.setState({
-      isOpenModal: !this.state.isOpenModal,
-    });
-  }
 
   //Handle Event of Searching Staff Uncontrolled Form
   handleFormSubmit(event) {
@@ -146,28 +137,6 @@ class StaffList extends Component {
               <div className="col-auto">
                 <h3>Nhân Viên</h3>
               </div>
-              {/*  Button Add New*/}
-              <div className="col-auto mr-lg-5">
-                <Button onClick={this.toggleModal} color="primary">
-                  <span className="fa fa-plus-square"></span> Add New
-                </Button>
-              </div>
-              {/*  Modal Add New Staff */}
-              <Modal isOpen={this.state.isOpenModal} toggle={this.toggleModal}>
-                <ModalHeader
-                  toggle={this.toggleModal}
-                  className="bg-primary text-white"
-                >
-                  Thêm Nhân viên mới
-                </ModalHeader>
-                <ModalBody>
-                  <AddStaffForm
-                    toggleModal={this.toggleModal}
-                    resetAddStaffForm={this.props.resetAddStaffForm}
-                    postNewStaff={this.props.postNewStaff}
-                  />
-                </ModalBody>
-              </Modal>
             </div>
           </div>
           {/*Search Form - Uncontrolled Form */}
@@ -207,11 +176,11 @@ class StaffList extends Component {
                   return this.setSortBy(sortBy);
                 }}
               >
-                <option>Choose ...</option>
+                <option>Sắp Xếp Theo ...</option>
                 <option value="StaffId">Mã nhân viên A-Z</option>
                 <option value="StaffIdReverse">Mã nhân viên Z-A</option>
-                <option value="StaffName">Tên A-Z</option>
-                <option value="StaffNameReverse">Tên Z-A</option>
+                <option value="StaffName">Tên Nhân Viên A-Z</option>
+                <option value="StaffNameReverse">Tên Nhân Viên Z-A</option>
               </Input>
             </FormGroup>
           </Form>
