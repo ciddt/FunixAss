@@ -29,7 +29,7 @@ class AddStaffForm extends Component {
         annualLeave: annualLeave,
         overTime: overTime,
         image: "/assets/images/staffAdded.png",
-        salary: salary
+        salary: salary,
       };
 
       console.log(newStaff);
@@ -55,7 +55,7 @@ class AddStaffForm extends Component {
               validators={{
                 required,
                 minLength: minLength(2),
-                maxLength: maxLength(30)
+                maxLength: maxLength(30),
               }}
             />
             <Errors
@@ -65,7 +65,7 @@ class AddStaffForm extends Component {
               messages={{
                 required: "Không được để trống. ",
                 minLength: "Hãy nhập nhiều hơn 2 ký tự",
-                maxLength: "Hãy cầu nhập ít hơn 30 ký tự"
+                maxLength: "Hãy cầu nhập ít hơn 30 ký tự",
               }}
             />
           </Col>
@@ -82,7 +82,7 @@ class AddStaffForm extends Component {
               name="doB"
               className="form-control"
               validators={{
-                required
+                required,
               }}
             />
             <Errors
@@ -107,7 +107,7 @@ class AddStaffForm extends Component {
               name="startDate"
               className="form-control"
               validators={{
-                required
+                required,
               }}
             />
             <Errors
@@ -150,7 +150,7 @@ class AddStaffForm extends Component {
               name="salaryScale"
               className="form-control"
               validators={{
-                isNumber
+                isNumber,
               }}
             />
             <Errors
@@ -174,7 +174,7 @@ class AddStaffForm extends Component {
               name="annualLeave"
               className="form-control"
               validators={{
-                isNumber
+                isNumber,
               }}
             />
             <Errors
@@ -198,7 +198,7 @@ class AddStaffForm extends Component {
               name="overTime"
               className="form-control"
               validators={{
-                isNumber
+                isNumber,
               }}
             />
             <Errors

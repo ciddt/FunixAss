@@ -1,26 +1,33 @@
 import React, { Component } from "react";
-import { Navbar, NavbarToggler, Collapse, Nav, NavItem, NavbarBrand } from "reactstrap";
+import {
+  Navbar,
+  NavbarToggler,
+  Collapse,
+  Nav,
+  NavItem,
+  NavbarBrand,
+} from "reactstrap";
 import { NavLink } from "react-router-dom";
 
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isNavOpen: false
+      isNavOpen: false,
     };
     this.toggleNav = this.toggleNav.bind(this);
   }
 
   toggleNav() {
     this.setState({
-      isNavOpen: !this.state.isNavOpen
+      isNavOpen: !this.state.isNavOpen,
     });
   }
 
   //When search name finish => url change to /search/searchName
   changeUrlSearch(searchName) {
-    console.log(searchName)
-    window.location.pathname = `/search/${searchName}`
+    console.log(searchName);
+    window.location.pathname = `/search/${searchName}`;
   }
 
   render() {
