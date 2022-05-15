@@ -72,38 +72,6 @@ class StaffList extends Component {
         staffs.sort((staff1, staff2) => staff2.id - staff1.id);
         break;
       }
-      case "StaffName": {
-        staffs.sort((staff1, staff2) => {
-          let name1 = staff1.name.split(" ");
-          let firstname1 = name1[name1.length - 1].toUpperCase();
-          let name2 = staff2.name.split(" ");
-          let firstname2 = name2[name1.length - 1].toUpperCase();
-          if (firstname1 < firstname2) {
-            return -1;
-          }
-          if (firstname1 > firstname2) {
-            return 1;
-          }
-          return 0;
-        });
-        break;
-      }
-      case "StaffNameReverse": {
-        staffs.sort((staff1, staff2) => {
-          let name1 = staff1.name.split(" ");
-          let firstname1 = name1[name1.length - 1].toUpperCase();
-          let name2 = staff2.name.split(" ");
-          let firstname2 = name2[name1.length - 1].toUpperCase();
-          if (firstname1 < firstname2) {
-            return 1;
-          }
-          if (firstname1 > firstname2) {
-            return -1;
-          }
-          return 0;
-        });
-        break;
-      }
     }
   }
 
@@ -175,8 +143,6 @@ class StaffList extends Component {
                 <option>Sắp Xếp Theo ...</option>
                 <option value="StaffId">Mã nhân viên A-Z</option>
                 <option value="StaffIdReverse">Mã nhân viên Z-A</option>
-                <option value="StaffName">Tên Nhân Viên A-Z</option>
-                <option value="StaffNameReverse">Tên Nhân Viên Z-A</option>
               </Input>
             </FormGroup>
           </Form>

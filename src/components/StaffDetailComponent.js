@@ -48,8 +48,6 @@ class StaffDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // isOpenModal: false,
-      // isDeleteStaff: false,
       doB: this.props.staff ? this.props.staff.doB : null,
       startDate: this.props.staff ? this.props.staff.startDate : null,
     };
