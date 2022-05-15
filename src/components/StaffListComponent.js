@@ -90,7 +90,7 @@ class StaffList extends Component {
           let name1 = staff1.name.split(" ");
           let firstname1 = name1[name1.length - 1].toUpperCase();
           let name2 = staff2.name.split(" ");
-          let firstname2 = name2[name1.length - 1].toUpperCase();
+          let firstname2 = name2[name2.length - 1].toUpperCase();
           if (firstname1 < firstname2) {
             return -1;
           }
