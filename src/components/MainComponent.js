@@ -1,15 +1,11 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect, Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { actions } from "react-redux-form";
 import {
   fetchStaffs,
   fetchDepartments,
   fetchDeptStaffs,
-  fetchSalary,
-  patchUpdateStaff,
-  deleteStaff,
-  postNewStaff,
+  fetchSalary
 } from "../redux/actions/ActionCreators";
 
 import Header from "./HeaderComponent";

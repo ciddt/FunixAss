@@ -3,17 +3,9 @@ import {
   Media,
   Breadcrumb,
   BreadcrumbItem,
-  Button,
-  Modal,
-  ModalBody,
-  ModalHeader,
-  Row,
-  Col,
-  Label,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import dateFormat from "dateformat";
-import { LocalForm, Control, Errors } from "react-redux-form";
 import { Fade } from "react-animation-components";
 import { Loading } from "./LoadingComponent";
 

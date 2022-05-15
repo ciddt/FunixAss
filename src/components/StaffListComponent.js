@@ -10,9 +10,6 @@ import {
   Input,
   Button,
   Col,
-  Modal,
-  ModalHeader,
-  ModalBody,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { FadeTransform } from "react-animation-components";
@@ -50,7 +47,6 @@ class StaffList extends Component {
     this.staffs = JSON.parse(JSON.stringify(this.props.staffs));
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
-
 
   //Handle Event of Searching Staff Uncontrolled Form
   handleFormSubmit(event) {
